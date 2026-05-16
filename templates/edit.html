@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="bg-slate-100 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-lg bg-white rounded-2xl shadow-lg p-8">
+
+    <h1 class="text-3xl font-bold text-slate-800 mb-2 flex items-center gap-3">
+        <i class="fa-solid fa-user-pen text-blue-600"></i>
+        Edit User
+    </h1>
+
+    <p class="text-slate-500 mb-6">
+        Update user information
+    </p>
+
+    <form action="/update/{{ user.id }}"
+          method="post"
+          class="space-y-5">
+
+        <!-- Name -->
+        <div>
+
+            <label class="block mb-2 text-sm font-medium text-slate-600">
+                Name
+            </label>
+
+            <div class="relative">
+
+                <i class="fa-solid fa-user absolute left-3 top-3 text-slate-400"></i>
+
+                <input
+                    type="text"
+                    name="name"
+                    value="{{ user.name }}"
+                    required
+                    class="w-full border border-slate-300 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- Email -->
+        <div>
+
+            <label class="block mb-2 text-sm font-medium text-slate-600">
+                Email
+            </label>
+
+            <div class="relative">
+
+                <i class="fa-solid fa-envelope absolute left-3 top-3 text-slate-400"></i>
+
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ user.email }}"
+                    required
+                    class="w-full border border-slate-300 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex gap-4 pt-4">
+
+            <button
+                type="submit"
+                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl transition flex items-center justify-center gap-2"
+            >
+
+                <i class="fa-solid fa-floppy-disk"></i>
+                Update
+
+            </button>
+
+            <a href="/"
+               class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 py-3 rounded-xl transition text-center flex items-center justify-center gap-2">
+
+                <i class="fa-solid fa-arrow-left"></i>
+                Back
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

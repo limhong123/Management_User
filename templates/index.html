@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<div class="max-w-5xl mx-auto px-6 py-10">
+
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">
+            <i class="fa-solid fa-users text-blue-600 mr-2"></i>
+            User Management
+        </h1>
+        <p class="text-gray-500 mt-1">Create and manage users</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow p-6 mb-8">
+        <h2 class="text-xl font-semibold text-gray-700 mb-5">
+            <i class="fa-solid fa-user-plus text-blue-600 mr-2"></i>
+            Add New User
+        </h2>
+
+        <form action="/create" method="post" class="grid md:grid-cols-3 gap-4">
+            <input
+                type="text"
+                name="name"
+                required
+                placeholder="Name"
+                class="border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+
+            <input
+                type="email"
+                name="email"
+                required
+                placeholder="Email"
+                class="border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+
+            <button
+                type="submit"
+                class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium px-4 py-3"
+            >
+                <i class="fa-solid fa-plus mr-2"></i>
+                Create
+            </button>
+        </form>
+    </div>
+
+    <div class="bg-white rounded-xl shadow overflow-hidden">
+        <div class="px-6 py-4 border-b">
+            <h2 class="text-xl font-semibold text-gray-700">
+                <i class="fa-solid fa-list text-blue-600 mr-2"></i>
+                Users
+            </h2>
+        </div>
+
+        {% if users %}
+        <table class="w-full text-left">
+            <thead class="bg-gray-50 text-gray-600">
+                <tr>
+                    <th class="px-6 py-3">ID</th>
+                    <th class="px-6 py-3">Name</th>
+                    <th class="px-6 py-3">Email</th>
+                    <th class="px-6 py-3 text-right">Action</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y">
+                {% for user in users %}
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4">{{ user.id }}</td>
+                    <td class="px-6 py-4 font-medium text-gray-800">{{ user.name }}</td>
+                    <td class="px-6 py-4 text-gray-600">{{ user.email }}</td>
+                    <td class="px-6 py-4">
+                        <div class="flex justify-end gap-2">
+                            <a
+                                href="/edit/{{ user.id }}"
+                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded-lg"
+                            >
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+
+                            <form action="/delete/{{ user.id }}" method="post">
+                                <button
+                                    type="submit"
+                                    class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg"
+                                >
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="p-10 text-center text-gray-500">
+            <i class="fa-solid fa-folder-open text-4xl mb-3"></i>
+            <p>No users found</p>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>
